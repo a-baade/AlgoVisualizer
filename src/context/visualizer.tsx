@@ -1,6 +1,6 @@
 "use client";
 
-import {SortingAlgorithmType} from "@/lib/types";
+import {AnimationArrayType, SortingAlgorithmType} from "@/lib/types";
 import {MAX_ANIM_SPEED, generateRandomNumFromInterval} from "@/lib/utils";
 import {createContext, useState, useEffect, useContext} from "react";
 
@@ -16,7 +16,8 @@ interface SortingAlgorithmContextType {
   isAnimComplete: boolean;
   setIsAnimComplete: (isAnimComplete: boolean) => void;
   resetArrayAndAnimation: () => void;
-  runAnimation: () => void;
+  runAnimation: (animations: AnimationArrayType) => void;
+  requiresReset: boolean;
 }
 
 const SortingAlgorithmContext = createContext<
@@ -30,7 +31,7 @@ export const SortingAlgorithmProvider = ({
 }) => {
   const [arrayToSort, setArrayToSort] = useState<number[]>([]);
   const [selectedAlgorithm, setSelectedAlgorithm] =
-    useState<SortingAlgorithmType>("selection");
+    useState<SortingAlgorithmType>("shaker");
   const [isSorting, setIsSorting] = useState<boolean>(false);
   const [animationSpeed, setAnimationSpeed] = useState<number>(MAX_ANIM_SPEED);
   const [isAnimComplete, setIsAnimComplete] = useState<boolean>(false);
@@ -58,9 +59,93 @@ export const SortingAlgorithmProvider = ({
     setArrayToSort(tempArray);
     setIsAnimComplete(false);
     setIsSorting(false);
+
+    const highestId = window.setTimeout(() => {
+      for (let i = highestId; i >= 0; i--) {
+        window.clearTimeout(i);
+      }
+    }, 0);
+
+    setTimeout(() => {
+      const arrayLines = document.getElementsByClassName(
+        "array-line"
+      ) as HTMLCollectionOf<HTMLElement>;
+      for (let i = 0; i < arrayLines.length; i++) {
+        arrayLines[i].classList.remove("changed-line-color");
+        arrayLines[i].classList.add("default-line-color");
+      }
+    });
   };
 
-  const runAnimation = () => {};
+  const requiresReset = isAnimComplete || isSorting;
+
+  const runAnimation = (animations: AnimationArrayType) => {
+    setIsSorting(true);
+    const inverseSpeed = (1 / animationSpeed) * 200;
+    const arrayLines = document.getElementsByClassName(
+      "array-line"
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    const updateClassList = (
+      indexes: number[],
+      addClassName: string,
+      removeClassName: string
+    ) => {
+      indexes.forEach((index) => {
+        if (arrayLines[index]) {
+          arrayLines[index].classList.remove(removeClassName);
+          arrayLines[index].classList.add(addClassName);
+        }
+      });
+    };
+
+    const updateHeightValue = (
+      lineIndex: number,
+      newHeight: number | undefined
+    ) => {
+      arrayLines[lineIndex].style.height = `${newHeight}px`;
+    };
+
+    animations.forEach((animation, index) => {
+      setTimeout(() => {
+        const [lineIndexes, isSwap] = animation;
+
+        if (!isSwap) {
+          updateClassList(
+            lineIndexes,
+            "changed-line-color",
+            "default-line-color"
+          );
+          setTimeout(() => {
+            updateClassList(
+              lineIndexes,
+              "default-line-color",
+              "changed-line-color"
+            );
+          }, inverseSpeed);
+        } else {
+          const [lineIndex, newHeight] = lineIndexes;
+          updateHeightValue(lineIndex, newHeight);
+        }
+      }, index * inverseSpeed);
+    });
+
+    const finalTimeOut = animations.length * inverseSpeed;
+    setTimeout(() => {
+      Array.from(arrayLines).forEach((line) => {
+        line.classList.add("pulse-animation", "changed-line-color");
+        line.classList.remove("default-line-color");
+      });
+      setTimeout(() => {
+        Array.from(arrayLines).forEach((line) => {
+          line.classList.remove("pulse-animation", "changed-line-color");
+          line.classList.add("default-line-color");
+        });
+        setIsSorting(false);
+        setIsAnimComplete(true);
+      }, 1000);
+    }, finalTimeOut);
+  };
 
   const value = {
     arrayToSort,
@@ -75,6 +160,7 @@ export const SortingAlgorithmProvider = ({
     setIsAnimComplete,
     resetArrayAndAnimation,
     runAnimation,
+    requiresReset,
   };
 
   return (
