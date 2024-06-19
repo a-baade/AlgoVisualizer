@@ -5,6 +5,10 @@ export type SortingAlgorithmType =
   | "merge"
   | "quick"
   | "shaker"
+  | "radix"
+  | "shell"
+  | "gnome"
+  | "bogo"
   | "heap";
 
 export type SelectOptionsType = {

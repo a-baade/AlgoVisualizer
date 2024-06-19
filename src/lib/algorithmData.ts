@@ -57,8 +57,35 @@ export const sortingAlgorithmData = {
   },
   heap: {
     title: "Heap",
-    description:
-      "Shaker Sort is a variation of Bubble sort. The Bubble sort algorithm always traverses elements from left and moves the largest element to its correct position in the first iteration and second-largest in the second iteration and so on. Shaker Sort traverses through a given array in both directions alternatively. Shaker sort does not go through the unnecessary iteration making it efficient for large arrays",
+    description: "TBA",
+    worstCase: "O(n²)",
+    averageCase: "O(n²)",
+    bestCase: "O(n)",
+  },
+  radix: {
+    title: "Radix",
+    description: "TBA",
+    worstCase: "O(n²)",
+    averageCase: "O(n²)",
+    bestCase: "O(n)",
+  },
+  shell: {
+    title: "Shell",
+    description: "TBA",
+    worstCase: "O(n²)",
+    averageCase: "O(n²)",
+    bestCase: "O(n)",
+  },
+  gnome: {
+    title: "Gnome",
+    description: "TBA",
+    worstCase: "O(n²)",
+    averageCase: "O(n²)",
+    bestCase: "O(n)",
+  },
+  bogo: {
+    title: "Bogo",
+    description: "TBA",
     worstCase: "O(n²)",
     averageCase: "O(n²)",
     bestCase: "O(n)",

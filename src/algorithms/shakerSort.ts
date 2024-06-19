@@ -15,8 +15,8 @@ function runShakerSort(array: number[], animations: AnimationArrayType) {
         array[i] = array[i + 1];
         array[i + 1] = temp;
         swapped = true;
-        animations.push([[i + 1, array[i + 1]], true]); // Corrected index to i+1
-        animations.push([[i, array[i]], true]); // Ensure correct index and value
+        animations.push([[i + 1, array[i + 1]], true]);
+        animations.push([[i, array[i]], true]);
       }
     }
     if (!swapped) break;

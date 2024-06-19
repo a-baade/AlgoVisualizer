@@ -21,7 +21,11 @@ export const algorithmOptions = [
   {label: "merge", value: "merge"},
   {label: "selection", value: "selection"},
   {label: "shaker", value: "shaker"},
+  {label: "radix", value: "radix"},
+  {label: "shell", value: "shell"},
   {label: "heap", value: "heap"},
+  {label: "gnome", value: "gnome"},
+  {label: "bogo", value: "bogo"},
 ];
 
 export function generateAnimationArray(
