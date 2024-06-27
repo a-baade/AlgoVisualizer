@@ -6,6 +6,8 @@ import {generateQuickSortAnimationArray} from "@/algorithms/quickSort";
 import {generateMergeSortAnimationArray} from "@/algorithms/mergeSort";
 import {generateShakerSortAnimationArray} from "@/algorithms/shakerSort";
 import {generateHeapSortAnimationArray} from "@/algorithms/heapSort";
+import {generateShellSortAnimationArray} from "@/algorithms/shellSort";
+import {generateGnomeSortAnimationArray} from "@/algorithms/gnomeSort";
 
 export const MIN_ANIM_SPEED = 100;
 export const MAX_ANIM_SPEED = 500;
@@ -21,11 +23,9 @@ export const algorithmOptions = [
   {label: "merge", value: "merge"},
   {label: "selection", value: "selection"},
   {label: "shaker", value: "shaker"},
-  {label: "radix", value: "radix"},
   {label: "shell", value: "shell"},
   {label: "heap", value: "heap"},
   {label: "gnome", value: "gnome"},
-  {label: "bogo", value: "bogo"},
 ];
 
 export function generateAnimationArray(
@@ -54,6 +54,12 @@ export function generateAnimationArray(
       break;
     case "heap":
       generateHeapSortAnimationArray(isSorting, array, runAnimation);
+      break;
+    case "shell":
+      generateShellSortAnimationArray(isSorting, array, runAnimation);
+      break;
+    case "gnome":
+      generateGnomeSortAnimationArray(isSorting, array, runAnimation);
       break;
     default:
       break;

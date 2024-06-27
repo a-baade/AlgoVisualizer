@@ -57,35 +57,24 @@ export const sortingAlgorithmData = {
   },
   heap: {
     title: "Heap",
-    description: "TBA",
-    worstCase: "O(n²)",
-    averageCase: "O(n²)",
-    bestCase: "O(n)",
-  },
-  radix: {
-    title: "Radix",
-    description: "TBA",
-    worstCase: "O(n²)",
-    averageCase: "O(n²)",
-    bestCase: "O(n)",
+    description:
+      "Heap Sort is an efficient sorting algorithm that uses a binary heap data structure. It operates by building a max heap (or min heap) from the input data, then repeatedly removing the maximum element from the heap and inserting it at the end of the sorted section of the array. This process continues until the entire array is sorted.",
+    worstCase: "O(n log n)",
+    averageCase: "O(n log n)",
+    bestCase: "O(n log n)",
   },
   shell: {
     title: "Shell",
-    description: "TBA",
+    description:
+      "Shell Sort is an optimization of Insertion Sort that allows elements far apart to be compared and swapped. It starts by comparing elements that are far apart and progressively reduces the gap between elements until it becomes 1, at which point the algorithm reverts to standard Insertion Sort.",
     worstCase: "O(n²)",
-    averageCase: "O(n²)",
-    bestCase: "O(n)",
+    averageCase: "O(n*log n)~O(n1.25)",
+    bestCase: " Ω(n log(n))",
   },
   gnome: {
     title: "Gnome",
-    description: "TBA",
-    worstCase: "O(n²)",
-    averageCase: "O(n²)",
-    bestCase: "O(n)",
-  },
-  bogo: {
-    title: "Bogo",
-    description: "TBA",
+    description:
+      "Gnome Sort also called Stupid sort is based on the concept of a Garden Gnome sorting his flower pots. A garden gnome sorts the flower pots by the following method, He looks at the flower pot next to him and the previous one; if they are in the right order he steps one pot forward, otherwise he swaps them and steps one pot backwards. If there is no previous pot (he is at the starting of the pot line), he steps forwards; if there is no pot next to him (he is at the end of the pot line), he is done.",
     worstCase: "O(n²)",
     averageCase: "O(n²)",
     bestCase: "O(n)",
